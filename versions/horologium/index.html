@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>时间的尽头 · FINIS TEMPORIS — 3D Relativistic Singularity & Celestial Horologium</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='26' fill='%23040508' stroke='%23E8B86D' stroke-width='3'/><circle cx='32' cy='32' r='10' fill='%23E8B86D'/></svg>" />
+  <link rel="stylesheet" href="./styles.css" />
+
+  <!-- Local Three.js r160 ES Module Import Map -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three/build/three.module.js",
+        "three/addons/": "./vendor/three/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Initial Loading Veil -->
+  <div id="loading-veil">
+    <div class="loader-ring"></div>
+    <div class="loader-text">CALIBRATING EVENT HORIZON · 校准视界度规</div>
+  </div>
+
+  <!-- 3D WebGL Viewport -->
+  <div id="webgl-container" aria-label="时间的尽头 3D 交互式宇宙天体仪"></div>
+
+  <!-- Subtle Astrolabe Observatory Frame -->
+  <div class="observatory-frame">
+    <div class="corner-mark tl"></div>
+    <div class="corner-mark tr"></div>
+    <div class="corner-mark bl"></div>
+    <div class="corner-mark br"></div>
+  </div>
+
+  <!-- Central Subtle Astrolabe Geometric SVG Reticle -->
+  <svg id="astrolabe-reticle" class="astrolabe-reticle" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="300" cy="300" r="286" stroke="#E8B86D" stroke-width="0.6" stroke-dasharray="2 6" />
+    <circle cx="300" cy="300" r="240" stroke="#E8B86D" stroke-width="0.5" stroke-opacity="0.5" />
+    <circle cx="300" cy="300" r="168" stroke="#72B8D4" stroke-width="0.5" stroke-dasharray="1 8" stroke-opacity="0.6" />
+    <line x1="14" y1="300" x2="70" y2="300" stroke="#E8B86D" stroke-width="0.7" />
+    <line x1="530" y1="300" x2="586" y2="300" stroke="#E8B86D" stroke-width="0.7" />
+    <line x1="300" y1="14" x2="300" y2="70" stroke="#E8B86D" stroke-width="0.7" />
+    <line x1="300" y1="530" x2="300" y2="586" stroke="#E8B86D" stroke-width="0.7" />
+  </svg>
+
+  <!-- Floating 3D Hover Tooltip for Orbital Relics -->
+  <div id="relic-hover-tag" class="relic-hover-tag">
+    <span class="tag-roman">IV</span>
+    <span class="tag-name">黄金星轨 · Celestial Order</span>
+  </div>
+
+  <!-- Architectural Observatory HUD -->
+  <main class="hud-layer">
+
+    <!-- TOP BAR: Monumental Title & Relativistic Telemetry -->
+    <header class="hud-top">
+      <div class="brand-monument">
+        <div class="title-row">
+          <h1 class="main-title">时间的尽头</h1>
+          <span class="latin-subtitle">FINIS TEMPORIS · Ω</span>
+        </div>
+        <p id="poetic-epigraph" class="poetic-epigraph">
+          “当第一缕星光校准浑天仪的刻度，万物皆在开普勒的黄金律令中周而复始。”
+        </p>
+      </div>
+
+      <div class="telemetry-cluster">
+        <div class="telemetry-grid">
+          <div class="metric-cell">
+            <span class="metric-label">固有时 · PROPER TIME (τ)</span>
+            <span id="metric-tau" class="metric-value">+00:00.000 s</span>
+          </div>
+          <div class="metric-cell">
+            <span class="metric-label">膨胀因子 · LORENTZ (γ)</span>
+            <span id="metric-gamma" class="metric-value cyan">γ = 1.4280</span>
+          </div>
+          <div class="metric-cell">
+            <span class="metric-label">视界距离 · HORIZON (r/Rₛ)</span>
+            <span id="metric-radius" class="metric-value">8.45 Rₛ</span>
+          </div>
+          <div class="metric-cell">
+            <span class="metric-label">宇宙熵流 · ENTROPY (dS/dt)</span>
+            <span id="metric-entropy" class="metric-value ember">+1.381 k_B</span>
+          </div>
+        </div>
+
+        <div class="utility-bar interactive">
+          <button id="btn-audio" class="inst-btn" title="开启/关闭实时WebAudio宇宙管风琴与引力声景">
+            <span class="dot"></span>
+            <span class="btn-text">宇宙声景 · OFF</span>
+          </button>
+          <button id="btn-drift" class="inst-btn active" title="开启/关闭环绕轨道自动巡航">
+            <span class="dot"></span>
+            <span class="btn-text">星轨巡航</span>
+          </button>
+          <button id="btn-reset-cam" class="inst-btn" title="复位当前纪元观测视角 (快捷键 R)">
+            <span>复位视角</span>
+          </button>
+          <button id="btn-cinema" class="inst-btn" title="隐藏仪表界面，进入沉浸式纯净视界 (快捷键 H)">
+            <span class="btn-text">纯净视界</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MIDDLE SECTION: 4 Temporal Epochs (Left) & 12 Orbital Relic Inspector (Right) -->
+    <section class="hud-middle">
+      <nav class="epoch-nav interactive" aria-label="时间纪元切换">
+        <button class="epoch-item active" data-epoch="0">
+          <span class="epoch-num">CHAPTER I · t &lt; 0</span>
+          <span class="epoch-name">秩序之轮</span>
+          <span class="epoch-sub">黄金浑天仪与开普勒谐振</span>
+        </button>
+        <button class="epoch-item" data-epoch="1">
+          <span class="epoch-num">CHAPTER II · r → Rₛ</span>
+          <span class="epoch-name">引力膨胀</span>
+          <span class="epoch-sub">史瓦西深渊与多普勒红移</span>
+        </button>
+        <button class="epoch-item" data-epoch="2">
+          <span class="epoch-num">CHAPTER III · ΔS &lt; 0</span>
+          <span class="epoch-name">熵寂逆流</span>
+          <span class="epoch-sub">时间之箭反转与星尘重聚</span>
+        </button>
+        <button class="epoch-item" data-epoch="3">
+          <span class="epoch-num">CHAPTER IV · t = ∞</span>
+          <span class="epoch-name">奇点终焉</span>
+          <span class="epoch-sub">爱因斯坦光环与永恒凝滞</span>
+        </button>
+      </nav>
+
+      <!-- Selected Orbital Relic Inspector -->
+      <aside class="relic-inspector interactive" aria-label="时间遗迹晶碑档案">
+        <div class="inspector-header">
+          <span id="relic-roman" class="relic-roman">RELIC IV / XII</span>
+          <span id="relic-coord" class="relic-coord">t = +4.6×10⁹ yr · γ = 1.00</span>
+        </div>
+        <h2 id="relic-title" class="relic-title">黄金星轨 · Celestial Order</h2>
+        <p id="relic-desc" class="relic-desc">
+          行星沿开普勒椭圆精密运转，昼夜、四季与潮汐构成了生命感知“时间流逝”的黄金钟摆。
+        </p>
+        <div class="relic-actions">
+          <button id="btn-focus-relic" class="inst-btn">聚焦此晶碑</button>
+          <button id="btn-next-relic" class="inst-btn">下一座遗迹 ›</button>
+        </div>
+      </aside>
+    </section>
+
+    <!-- BOTTOM BAR: Interaction Guide, Continuous Time Velocity Scrubber & Singularity Pulse -->
+    <footer class="hud-bottom">
+      <div class="interaction-hints">
+        <div class="hint-line">
+          <span class="key-badge">左键拖拽 / 滚轮</span>
+          <span>360° 自由环绕奇点与缩放视距</span>
+        </div>
+        <div class="hint-line">
+          <span class="key-badge">鼠标掠过星盘</span>
+          <span>产生局部三维引力场，弯曲时空网格与粒子流</span>
+        </div>
+        <div class="hint-line">
+          <span class="key-badge">点击晶碑 / SPACE</span>
+          <span>检视 12 座时间遗迹 · 空格键瞬间冻结时间</span>
+        </div>
+      </div>
+
+      <!-- Continuous Temporal Velocity Controller -->
+      <div class="time-controller interactive">
+        <div class="scrubber-header">
+          <span class="scrubber-title">时间流速曲率 · TEMPORAL VELOCITY (dτ/dt)</span>
+          <span id="scrubber-readout" class="scrubber-readout">+1.00x · 正向演化</span>
+        </div>
+        <div class="slider-wrapper">
+          <span class="scale-label">-2.5x 逆流</span>
+          <input
+            id="time-slider"
+            class="time-slider"
+            type="range"
+            min="-2.5"
+            max="4.0"
+            step="0.01"
+            value="1.0"
+            aria-label="时间流速滑块"
+          />
+          <span class="scale-label">+4.0x 坍缩</span>
+        </div>
+        <div class="quick-time-btns">
+          <button class="inst-btn" data-timescale="-1.5">⟲ 逆流 (-1.5x)</button>
+          <button class="inst-btn" data-timescale="0.0">⏸ 绝对凝滞 (0.0x)</button>
+          <button class="inst-btn" data-timescale="0.25">⏳ 视界慢放 (0.25x)</button>
+          <button class="inst-btn" data-timescale="1.0">▶ 基准固有时 (1.0x)</button>
+          <button class="inst-btn" data-timescale="3.2">⚡ 极速坍缩 (3.2x)</button>
+        </div>
+      </div>
+
+      <!-- Singularity Collapse / Shockwave Trigger -->
+      <div class="singularity-actions interactive">
+        <button id="btn-collapse" class="inst-btn collapse-btn" title="释放引力波冲击环与奇点脉冲 (快捷键 P 或双击画面)">
+          <span>✦ 触发奇点脉冲 · BIG BOUNCE</span>
+        </button>
+      </div>
+    </footer>
+
+  </main>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#05080d"><meta name="description" content="在最后一颗恒星熄灭之后，走进一座漂浮的时间圣环。自由探索、冻结时间、让宇宙倒流。">
+<title>时间的尽头 — The end of time</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='23' fill='none' stroke='%23eac58d' stroke-width='3'/%3E%3Ccircle cx='32' cy='32' r='14' fill='%2305080d' stroke='%23eac58d'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./src/style.css">
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
+</head>
+<body>
+<main id="world" aria-label="时间的尽头，三维交互空间"></main>
+<div class="grain" aria-hidden="true"></div><div class="vignette" aria-hidden="true"></div>
+<div id="loader"><div class="loader-orbit"></div><p>正在抵达时间的尽头</p><span>Gathering the last light</span><p id="load-error" hidden>空间未能启动。请使用支持 WebGL 2 的浏览器，然后刷新。</p></div>
+<header class="topbar">
+<a class="identity" href="#" aria-label="返回初始视角"><svg viewBox="0 0 38 38" aria-hidden="true"><circle cx="19" cy="19" r="14"/><ellipse cx="19" cy="19" rx="6" ry="18" transform="rotate(36 19 19)"/><path d="M1 19h36M19 4v4M19 30v4"/><circle cx="19" cy="19" r="2"/></svg><span>无尽之所<small>A place beyond time</small></span></a>
+<div class="coordinates"><i></i><span id="world-status">时间仍在流逝</span><span class="coord-line">边界之外 · 13.8 × 10⁹ 年</span></div>
+<div class="top-actions"><button id="sound" class="icon-button" aria-label="开启声音" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6L8 10H4Z"/><path class="sound-wave" d="M17 9q4 3 0 6M19 6q7 6 0 12"/><path class="sound-off" d="m17 10 4 4m0-4-4 4"/></svg></button><button id="capture" class="icon-button" aria-label="保存画面"><svg viewBox="0 0 24 24"><path d="M4 7h4l2-3h4l2 3h4v13H4Z"/><circle cx="12" cy="13" r="4"/></svg></button><button id="help" class="icon-button" aria-label="打开操作指南"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9a3 3 0 1 1 4 3c-1 .5-1 1-1 2M12 17h.01"/></svg></button></div>
+</header>
+<aside class="chapter-rail" aria-label="宇宙篇章"><span class="rail-line"></span><button data-chapter="0" class="chapter active" aria-pressed="true"><span>01</span><b>终焉</b></button><button data-chapter="1" class="chapter" aria-pressed="false"><span>02</span><b>回声</b></button><button data-chapter="2" class="chapter" aria-pressed="false"><span>03</span><b>新生</b></button><span class="rail-line"></span></aside>
+<section class="hero"><p class="prelude"><span></span>一场关于消逝与永恒的漫游</p><h1>时间的尽头</h1><p class="english-title">The end of time</p><p class="description" id="chapter-description">当最后一颗恒星熄灭，<br>还有什么，会被宇宙记得。</p><button class="journey" id="journey"><span class="journey-symbol">↗</span><span>靠近最后的光<small>Enter the event horizon</small></span></button></section>
+<div id="relic-label" hidden><span></span>记忆残片 · 点击拾取</div>
+<div class="world-caption"><span class="caption-line"></span><span id="object-caption">时间圣环</span><small id="object-caption-en">The last chronometer</small></div>
+<div class="discovery"><span class="discovery-dot"></span><span>漂流档案</span><button id="archive-open" aria-label="查看漂流档案"><b id="discovery-count">0</b><span> / 3</span><span class="arrow">↗</span></button></div>
+<footer class="bottom-bar"><div class="interaction-hint"><svg viewBox="0 0 20 26"><rect x="3" y="2" width="14" height="22" rx="7"/><path d="M10 3v7"/></svg><span>拖动环绕<em>滚轮靠近 · 点击光点拾取记忆</em></span></div><div class="transport"><button id="reverse" class="transport-button" aria-label="倒流时间" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="m12 6-7 6 7 6V6Zm7 0-7 6 7 6V6Z"/></svg></button><button id="pause" class="transport-button play" aria-label="冻结时间" aria-pressed="false"><svg class="pause-icon" viewBox="0 0 24 24"><path d="M9 7v10M15 7v10"/></svg><svg class="play-icon" viewBox="0 0 24 24"><path d="m9 6 9 6-9 6V6Z"/></svg></button><div class="timeline"><label for="speed">时间流速 <output id="speed-value">1.0 ×</output></label><input id="speed" aria-label="时间流速" type="range" min="-2" max="2" step="0.1" value="1"></div><span id="time-counter">+ 000.00</span></div><div class="view-actions"><button id="quality" aria-label="切换画质">画质 <span>高</span></button><button id="reset" aria-label="重置视角">重置视角 <span>↺</span></button><button id="fullscreen" class="icon-button" aria-label="切换全屏"><svg viewBox="0 0 24 24"><path d="M4 9V4h5m6 0h5v5M4 15v5h5m6 0h5v-5"/></svg></button></div></footer>
+<div class="modal-backdrop" id="help-modal" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="help-title"><button class="close" aria-label="关闭">×</button><p class="dialog-overline">给时间之外的旅人</p><h2 id="help-title">你可以，改变时间。</h2><p>这里没有终点。慢下来，看看光留下的痕迹。</p><dl><div><dt>拖动鼠标 / 单指滑动</dt><dd>自由环绕圣环</dd></div><div><dt>滚轮 / 双指缩放</dt><dd>穿行于远方与核心</dd></div><div><dt>点击空间 / 长按空间</dt><dd>释放引力涟漪 / 积蓄能量</dd></div><div><dt>空格 / R / F</dt><dd>冻结时间 / 重置视角 / 全屏</dd></div><div><dt>寻找三颗明亮的漂流光点</dt><dd>拾取时间遗失的记忆</dd></div></dl><button class="text-button" id="help-start">继续漫游 ↗</button></section></div>
+<div class="modal-backdrop" id="archive-modal" hidden><section class="dialog archive-dialog" role="dialog" aria-modal="true" aria-labelledby="archive-title"><button class="close" aria-label="关闭">×</button><p class="dialog-overline" id="archive-number">漂流档案</p><h2 id="archive-title">宇宙记得的事</h2><p id="archive-text">有三份记忆藏在圣环周围。寻找那些有细长光芒的光点，点击它们，听见时间的回声。</p><div class="archive-tabs"><button data-memory="0">01 <span>未拾取</span></button><button data-memory="1">02 <span>未拾取</span></button><button data-memory="2">03 <span>未拾取</span></button></div><p class="archive-footnote">消逝并非遗忘。你见证的，已成为永恒。</p></section></div>
+<div id="toast" role="status" aria-live="polite"></div><div id="pulse-cursor" aria-hidden="true"></div>
+<script type="module" src="./src/main.js"></script>
+</body></html>

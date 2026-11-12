@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101518">
+<title>时间的尽头 · 模型作品对照</title><meta name="description" content="同一条 Three.js 提示词，三个模型的互动网页作品。对照实际画面，切换版本试玩。">
+<link rel="icon" href="data:,"><link rel="stylesheet" href="assets/gallery.css"><script defer src="assets/gallery.js"></script></head>
+<body><main class="wrap"><header class="mast"><span>Three.js 互动作品对照</span><a href="https://github.com/ElninoZhong/end-of-time-comparison">GitHub 源码 ↗</a></header>
+<section class="intro" aria-labelledby="title"><h1 id="title">时间的尽头</h1><p>同一条提示词，三个模型各自构想的时间终点。选择一幅画面进入作品。</p></section>
+<section class="gallery" aria-label="各模型的画面与玩法"><article aria-labelledby="title-tide">
+      <a class="shot" href="versions/tide/index.html" data-edition="tide" aria-label="试玩终潮观测站（GPT-6-Astra）"><img src="previews/tide.jpg" width="900" height="600" alt="终潮观测站的网页实拍：海面、信标与三段残响"></a>
+      <div class="model">GPT-6-Astra</div><h2 id="title-tide">终潮观测站</h2>
+      <p class="summary">拖动海面的视角，在第二章让潮汐倒流，第三章凝住时间，接住一束光。</p><a class="play" href="versions/tide/index.html" data-edition="tide">试玩这个版本 <span aria-hidden="true">↗</span></a>
+    </article><article aria-labelledby="title-clock">
+      <a class="shot" href="versions/clock/index.html" data-edition="clock" aria-label="试玩破碎宇宙时钟（GPT-6.1-Sol）"><img src="previews/clock.jpg" width="900" height="600" alt="破碎宇宙时钟的网页实拍：破碎的金属圣环与星尘"></a>
+      <div class="model">GPT-6.1-Sol</div><h2 id="title-clock">破碎宇宙时钟</h2>
+      <p class="summary">绕到断环背面，点击带光芒的漂流物拾取记忆。拖动时间滑块，观察星尘改变流向。</p><a class="play" href="versions/clock/index.html" data-edition="clock">试玩这个版本 <span aria-hidden="true">↗</span></a>
+    </article><article aria-labelledby="title-horologium">
+      <a class="shot" href="versions/horologium/index.html" data-edition="horologium" aria-label="试玩天文钟 · Finis Temporis（Gemini 4 Argon）"><img src="previews/horologium.jpg" width="900" height="600" alt="天文钟 · Finis Temporis的网页实拍：天文仪表、晶碑与四个纪元"></a>
+      <div class="model">Gemini 4 Argon</div><h2 id="title-horologium">天文钟 · Finis Temporis</h2>
+      <p class="summary">切换四个纪元，聚焦一座晶碑，再触发引力脉冲，观察星轨和仪表怎样响应。</p><a class="play" href="versions/horologium/index.html" data-edition="horologium">试玩这个版本 <span aria-hidden="true">↗</span></a>
+    </article></section>
+<details class="prompt"><summary>查看原始提示词与对比条件</summary><blockquote><p>请使用Three.js创作一个主题为《时间的尽头》的3D交互式网页。</p><p>充分发挥你最顶级的审美、艺术设计和3D编程能力，在构图、光影、材质、粒子、动画和空间氛围上做到极致。画面需要有令人震撼的视觉表现力，并且可以通过鼠标自由交互。不限制你的创意和技术方案，尽可能展示你的能力上限。请直接完成开发、运行和测试，交付一个真正可玩的作品。</p></blockquote><p>三份作品均取自 2026 年 11 月 11 日下午的创作记录，使用相同的首条提示词和 High 推理设置。两个 GPT 版本在 Codex 中创作，Gemini 版本在 Antigravity 中创作。后续对话和调试过程各有不同。</p></details>
+<footer><span>试玩需要支持 WebGL 2 的浏览器。</span></footer></main>
+<dialog id="player" aria-label="作品试玩"><div class="toolbar"><label><span class="hint">切换作品</span><select aria-label="切换作品" id="edition"><option value="tide" data-url="versions/tide/index.html">GPT-6-Astra · 终潮观测站</option><option value="clock" data-url="versions/clock/index.html">GPT-6.1-Sol · 破碎宇宙时钟</option><option value="horologium" data-url="versions/horologium/index.html">Gemini 4 Argon · 天文钟 · Finis Temporis</option></select></label>
+<div class="actions"><a id="standalone" target="_blank" rel="noopener">独立打开 ↗</a><button type="button" aria-label="关闭试玩，返回对照">返回对照</button></div></div><div id="screen"></div></dialog>
+</body></html>

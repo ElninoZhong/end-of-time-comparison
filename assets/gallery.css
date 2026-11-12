@@ -45,7 +45,8 @@ dialog::backdrop { background: #070a0c; }
 .toolbar label { display: flex; align-items: center; gap: .6em; }
 .toolbar button,.toolbar select { background: #1c2326; border: 1px solid #576267; border-radius: 4px; padding: .35rem .65rem; cursor: pointer; }
 .toolbar .actions { display: flex; align-items: center; gap: 1rem; }
-#screen { display: flex; flex: 1; min-height: 0; }
+#screen { position: relative; display: flex; flex: 1; min-height: 0; }
+.loading { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); }
 iframe { flex: 1; border: 0; width: 100%; }
 @media (max-width: 650px) {
   .mast { padding: .85em 0; }

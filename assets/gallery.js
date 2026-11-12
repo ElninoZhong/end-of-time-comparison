@@ -15,8 +15,17 @@ function showEdition(id) {
   const frame = document.createElement('iframe');
   frame.title = option.textContent;
   frame.allowFullscreen = true;
+  const loading = document.createElement('p');
+  loading.className = 'loading';
+  loading.setAttribute('role', 'status');
+  loading.textContent = '正在加载作品…';
+  frame.style.visibility = 'hidden';
+  frame.addEventListener('load', () => {
+    frame.style.visibility = '';
+    loading.remove();
+  }, { once: true });
   frame.src = option.dataset.url;
-  screen.replaceChildren(frame);
+  screen.replaceChildren(loading, frame);
 }
 
 if (typeof player.showModal === 'function') {
